@@ -1,14 +1,13 @@
-//  imports
+//  Imports
 const express = require("express");
 const controller = require("./item.controller");
 
-
-//  rota vinda do express
+//  Rota vinda do express
 const router = express.Router();
 
-//  rota 1 da aplicacao 'home'
+//  Rotas da aplicacao 'item'
 router.get("/", controller.findAll);
+router.get("/:id", controller.findById);
 
-
-//  export
+//  Export
 module.exports = router;
