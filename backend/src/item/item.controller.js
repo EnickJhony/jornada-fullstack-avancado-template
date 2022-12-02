@@ -28,10 +28,71 @@ const findById = (req, res) => {
 
     // Mandando a resposta com o Item montado Bonitinho, um verdadeiro xuxu!
     res.send(item);
-}
+};
+
+// Criando o Controller 'Create'
+const create = (req, res) => {
+    // Recebendo o Item do corpo da pagina
+    const item = req.body;
+
+    // Validando se os itens passados estao corretos
+    // - e retornando uma mensagem de erro caso nao esteja.
+    if(!item || !item.name || !item.imageUrl || !item.category) {
+        return res.status(400).send({ message: "Dados Inválidos!" });
+    }
+
+    // Criando o Item
+    const newItem = {};
+
+    // Mandando o Item.
+    res.status(201).send(newItem);
+};
+
+// Criando o Controller 'Update'
+const update = (req, res) => {
+    const id = req.params.id;
+
+    if(!isObjectIdValid(id)) {
+        return res.status(400).send({ message: "ID Inválido!"});
+    }
+
+    const item = req.body;
+
+    if(!item || !item.name || !item.imageUrl || !item.category) {
+        return res.status(400).send({ message: "Dados Inválidos!"});
+    }
+
+    const updateItem = {};
+
+    if(!updateItem) {
+        return res.send(404).send({ message: "Item não encontrado!"});
+    }
+    
+    res.send({ message: "Item Atualizado com sucesso!"});
+};
+
+// Criando o Controller 'DeleteById'
+const deleteById = (req, res) => {
+    const id = req.params.id;
+
+    if(!isObjectIdValid(id)) {
+        return res.status(400).send({ message: "ID Inválido!"});
+    }
+
+    const deletedItem = {};
+
+    if(!deletedItem) {
+        return res.status(404).send({ message: "Item não encontrado!"});
+    }
+
+    res.send({ message: "Item excluido com sucesso!"});
+};
 
 //  exportando os controllers do item
 module.exports = {
     findAll,
     findById,
+    create,
+    update,
+    deleteById,
 };
