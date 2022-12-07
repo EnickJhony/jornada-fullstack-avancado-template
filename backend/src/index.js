@@ -4,6 +4,8 @@ const cors = require("cors");
 
 // Imports dos Routers
 const itemRouter = require("./item/item.router");
+const categoryRouter = require("./category/category.router");
+
 
 
 // Porta do servidor
@@ -24,6 +26,7 @@ async function main() {
 
   // Inicialização dos `Routers`
   app.use("/item", itemRouter);
+  app.use("/category", categoryRouter);
 
   // Inicia o servidor
   app.listen(port, () => {
