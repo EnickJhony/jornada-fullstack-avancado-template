@@ -1,4 +1,3 @@
-//  Imports
 const express = require("express");
 const controller = require("./item.controller");
 

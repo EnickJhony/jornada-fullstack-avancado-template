@@ -1,10 +1,11 @@
-// Imports
 const express = require("express");
 const cors = require("cors");
+
 
 // Imports dos Routers
 const itemRouter = require("./item/item.router");
 const categoryRouter = require("./category/category.router");
+const { conectToDatabase } = require("./db/database.helper");
 
 
 
@@ -12,6 +13,8 @@ const categoryRouter = require("./category/category.router");
 const port = process.env.PORT || 3000;
 
 async function main() {
+  await conectToDatabase();
+
   // Cria o servidor `express`
   const app = express();
 
@@ -35,3 +38,7 @@ async function main() {
 }
 
 main().catch((err) => console.error("Um erro inesperado ocorreu.\n", err));
+
+
+//  atividade 1
+//  create findAll apenas com o Nome.
