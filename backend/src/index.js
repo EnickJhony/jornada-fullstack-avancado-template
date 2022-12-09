@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 
-// Imports dos Routers
+// Imports dos Routers e da validacao do DB
 const itemRouter = require("./item/item.router");
 const categoryRouter = require("./category/category.router");
 const { conectToDatabase } = require("./db/database.helper");
@@ -13,6 +13,7 @@ const { conectToDatabase } = require("./db/database.helper");
 const port = process.env.PORT || 3000;
 
 async function main() {
+  // Eh um helpper que auxilia na conexao do DB
   await conectToDatabase();
 
   // Cria o servidor `express`
