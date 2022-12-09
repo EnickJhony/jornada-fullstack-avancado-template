@@ -5,13 +5,13 @@ const findAll = () => {
     return Item.find().select("_id name imageUrl");
 };
 
-const create = (item) => {
-    return Item.create(item);
-}
-
 const findById = (id) => {
     const objectId = new ObjectId(id);
     return Item.findById(objectId);
+}
+
+const create = (item) => {
+    return Item.create(item);
 }
 
 const update = (id, item) => {
