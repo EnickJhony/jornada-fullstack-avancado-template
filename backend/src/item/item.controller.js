@@ -1,25 +1,24 @@
 const { isObjectIdValid } = require("../db/database.helper");
 const service = require("./item.service");
 
-//  criando o controller 'FindAll'
-//  - recebendo agora ums lista vazia de Itens que posteriormente vira do mongoose
 const findAll = async (req, res) => {
-    // substituindo o array vazio pelo findAll do item.service
+    // Buscando no Service a entidade Item
     const items = await service.findAll();
+    // E respondendo o 'item' criado
     res.send(items);
 };
 
-// Criando o Controller Find By Id
-// - recebendo o ID e por hora retornando a resposta do helper
 const findById = async (req, res) => {
+    // O findById recebe por padrao um ID, la no router.
+    // criando uma variavel que vai recer esse ID passado no Parametro GET.
     const id = req.params.id;
 
-    // Valida se o Objeto é valido, caso contrario, manda uma mensagem de ID invalido
+    // Verificando se o ID é valido via Helpper.
     if(!isObjectIdValid(id)) {
         return res.status(400).send({message: "ID inválido"});
     };
 
-    // Caso o ID seja valido Cria um dicionario do item
+    // Caso o ID seja valido utiliza o Service e buscar exatamente o Item do DB.
     const item = await service.findById(id);
 
     // Valida se o item existe, caso não, manda uma resposta de item não encontrado.
@@ -31,25 +30,23 @@ const findById = async (req, res) => {
     res.send(item);
 };
 
-// Criando o Controller 'Create'
 const create = async (req, res) => {
-    // Recebendo o Item do corpo da pagina
+    // Recebendo o Item do corpo da pagina, vindo do POST.
     const item = req.body;
 
-    // Validando se os itens passados estao corretos
-    // - e retornando uma mensagem de erro caso nao esteja.
+    // Validando se os itens passados estao corretos.
+    // Preciso Criar o Model do Category, pois ele está invalidando o Item.
+    // Vou dormir senao nao vai rolar corrida pela manhã. hihihihi
     if(!item || !item.name || !item.imageUrl || !item.category) {
         return res.status(400).send({ message: "Dados Inválidos!" });
     }
 
-    // Criando o Item
+    // Criando o Item vindo do service
     const newItem = await service.create(item);
 
-    // Mandando o Item.
     res.status(201).send(newItem);
 };
 
-// Criando o Controller 'Update'
 const update = async (req, res) => {
     const id = req.params.id;
 
