@@ -34,14 +34,10 @@ const create = async (req, res) => {
     // Recebendo o Item do corpo da pagina, vindo do POST.
     const item = req.body;
 
-    // Validando se os itens passados estao corretos.
-    // Preciso Criar o Model do Category, pois ele está invalidando o Item.
-    // Vou dormir senao nao vai rolar corrida pela manhã. hihihihi
     if(!item || !item.name || !item.imageUrl || !item.category) {
         return res.status(400).send({ message: "Dados Inválidos!" });
     }
 
-    // Criando o Item vindo do service
     const newItem = await service.create(item);
 
     res.status(201).send(newItem);

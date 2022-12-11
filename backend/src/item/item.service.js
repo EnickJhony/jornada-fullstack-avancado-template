@@ -1,8 +1,9 @@
 const Item = require("./item.model");
 const ObjectId = require("mongoose").Types.ObjectId;
-// Iniciando o findAll para pegar os objetos do mongoose
+
 const findAll = () => {
-    return Item.find().select("_id name imageUrl");
+    return Item.find();
+    //.select("_id name imageUrl")
 };
 
 const findById = (id) => {
