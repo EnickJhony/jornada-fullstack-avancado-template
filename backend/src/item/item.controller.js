@@ -65,7 +65,6 @@ const update = async (req, res) => {
     res.send({ message: "Item Atualizado com sucesso!"});
 };
 
-// Criando o Controller 'DeleteById'
 const deleteById = async (req, res) => {
     const id = req.params.id;
 
